@@ -6,7 +6,7 @@
 
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Animated } from "react-native";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 
 // Basic component, when can add props to show different styles
 const StyledView = styled.View`
@@ -23,6 +23,12 @@ const InnerView = StyledView.extend`
 // To create an animated component, like Animated.View
 const InnerViewAnimated = Animated.createAnimatedComponent(InnerView);
 
+const ThemeView = styled.View`
+  background-color: ${props => props.theme.primary};
+  border-color: ${props => props.theme.secondary};
+  border-width: 5;
+`;
+
 class App extends Component {
   state = {
     fadeAnim: new Animated.Value(0)
@@ -37,6 +43,11 @@ class App extends Component {
 
   render() {
     const { fadeAnim } = this.state;
+    const theme = {
+      primary: "green",
+      secondary: "yellow"
+    };
+
     return (
       <View style={styles.container}>
         <StyledView>
@@ -48,6 +59,11 @@ class App extends Component {
             <Text style={styles.instructions}>extending StyleView</Text>
           </InnerViewAnimated>
         </StyledView>
+        <ThemeProvider theme={theme}>
+          <ThemeView>
+            <Text>testing theme</Text>
+          </ThemeView>
+        </ThemeProvider>
       </View>
     );
   }
