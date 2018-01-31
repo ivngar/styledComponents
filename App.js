@@ -24,8 +24,11 @@ const InnerView = StyledView.extend`
 const InnerViewAnimated = Animated.createAnimatedComponent(InnerView);
 
 const ThemeView = styled.View`
-  background-color: ${props => props.theme.primary};
-  border-color: ${props => props.theme.secondary};
+  padding: 50px;
+  background-color: ${props =>
+    props.theme.primary ? props.theme.primary : "grey"};
+  border-color: ${props =>
+    props.theme.secondary ? props.theme.secondary : "black"};
   border-width: 5;
 `;
 
